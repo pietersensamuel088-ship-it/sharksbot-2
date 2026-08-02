@@ -9,7 +9,7 @@
   "deploy": {
     "runtime": "V2",
     "numReplicas": 1,
-    "startCommand": "py sharksbot.py",
+    "startCommand": "python3 sharksbot.py",
     "sleepApplication": false,
     "useLegacyStacker": false,
     "ipv6EgressEnabled": false,
