@@ -1,0 +1,74 @@
+{
+  "76561199562667583": {
+    "blacklist_id": "BL-0002",
+    "ingame_name": "TTVRecod",
+    "steam_id_64": "76561199562667583",
+    "reason": "Test",
+    "staff_id": 1162838607220965377,
+    "staff_name": "ttvrecord_00022",
+    "created_at": "2026-05-29T16:27:34.252261+00:00",
+    "steam_name": "TTVRecod",
+    "profile_url": "https://steamcommunity.com/profiles/76561199562667583/",
+    "avatar_url": "https://avatars.steamstatic.com/21cb0ecb3c91c25719817fcbd345c2a27a945c4f_full.jpg"
+  },
+  "76561198799133627": {
+    "blacklist_id": "BL-0003",
+    "ingame_name": "Kira",
+    "steam_id_64": "76561198799133627",
+    "reason": "test",
+    "staff_id": 1162838607220965377,
+    "staff_name": "ttvrecord_00022",
+    "created_at": "2026-05-29T16:28:32.514219+00:00",
+    "steam_name": "Kira",
+    "profile_url": "https://steamcommunity.com/profiles/76561198799133627/",
+    "avatar_url": "https://avatars.steamstatic.com/5fea668694c95ff82c2d9cc2b2afdb06a9d2bbb4_full.jpg"
+  },
+  "76561199622889144": {
+    "blacklist_id": "BL-0004",
+    "ingame_name": "TheCrumbBasic",
+    "steam_id_64": "76561199622889144",
+    "reason": "N/A",
+    "staff_id": 680381232680665137,
+    "staff_name": "kiraa_221",
+    "created_at": "2026-05-29T16:34:18.873636+00:00",
+    "steam_name": "TheCrumbBasic",
+    "profile_url": "https://steamcommunity.com/profiles/76561199622889144/",
+    "avatar_url": "https://avatars.steamstatic.com/dbbb094a4ea7f26a9149fb08d959d678d7edead5_full.jpg"
+  },
+  "76561199416125323": {
+    "blacklist_id": "BL-0005",
+    "ingame_name": "Dudebro",
+    "steam_id_64": "76561199416125323",
+    "reason": "Stealing (if I remember correctly)",
+    "staff_id": 680381232680665137,
+    "staff_name": "kiraa_221",
+    "created_at": "2026-05-29T16:34:46.601867+00:00",
+    "steam_name": "Mr Miyagi",
+    "profile_url": "https://steamcommunity.com/profiles/76561199416125323/",
+    "avatar_url": "https://avatars.steamstatic.com/e73699f5a9e11fa967e5fe50c1a00d7b69d3b06c_full.jpg"
+  },
+  "76561199259350058": {
+    "blacklist_id": "BL-0006",
+    "ingame_name": "SonicBlast",
+    "steam_id_64": "76561199259350058",
+    "reason": "Insiding",
+    "staff_id": 1162838607220965377,
+    "staff_name": "ttvrecord_00022",
+    "created_at": "2026-05-31T17:19:22.267299+00:00",
+    "steam_name": "sonicblast98",
+    "profile_url": "https://steamcommunity.com/profiles/76561199259350058/",
+    "avatar_url": "https://avatars.steamstatic.com/dcea0f0ee62f9af9abb6498bc79bc9d8be81b363_full.jpg"
+  },
+  "76561199040929840": {
+    "blacklist_id": "BL-0007",
+    "ingame_name": "evizu",
+    "steam_id_64": "76561199040929840",
+    "reason": "Gimp",
+    "staff_id": 1162838607220965377,
+    "staff_name": "ttvrecord_00022",
+    "created_at": "2026-05-31T17:20:14.209518+00:00",
+    "steam_name": "evizu",
+    "profile_url": "https://steamcommunity.com/profiles/76561199040929840/",
+    "avatar_url": "https://avatars.steamstatic.com/a989bc74bd9e2954cd07a4fbe309846a55db4001_full.jpg"
+  }
+}
