@@ -11,33 +11,62 @@ from aiohttp import web
 from discord import app_commands
 from discord.ext import commands, tasks
 
-TOKEN = ("MTUwNTk3Mjc0NDIxNzY5NDI1MA.Gw0NOA.OY7qtpk3WhpruYcwlQka6j9YMQ3kgp5jKeD5eU")
-STEAM_API_KEY = ("31B322B1DFE78769418C9936ADD7CE07")
-BASE_SAVE_FILE = Path("base_message.json")
-WARNINGS_FILE = Path("warnings.json")
-BINDINGS_FILE = Path("bindings.json")
-BLACKLIST_FILE = Path("blacklist.json")
-GIVEAWAYS_FILE = Path("giveaways.json")
-STATUS_MESSAGE_FILE = Path("status_message.json")
-GMOD_WEBHOOK_SETTINGS_FILE = Path("gmod_webhook_settings.json")
-WEB_DASHBOARD_HOST = "0.0.0.0"
-WEB_DASHBOARD_PORT = 8080
-DISCORD_LOGO_URL = "https://i.imgur.com/XUAp7MU.png"
-LOA_APPLICATIONS_CHANNEL_ID = 1508499978253766866
-LOA_PEOPLE_CHANNEL_ID = 1508501143100194948
-LOA_ROLE_ID = 1508499680252793075
-VERIFIED_ROLE_ID = 1508503687411011755
-GANG_MEMBER_ROLE_ID = 1503498704278257775
-STARTER_ROLE_ID = 1486165333336260755
-BOT_STATUS_CHANNEL_ID = 1508529868277813398
-BLACKLIST_CHANNEL_ID = 1493910793295495258
-GMOD_WEBHOOK_URL = "https://discord.com/api/webhooks/1510270129626288251/hdzEAexfblVPmQYVo2Q2B1hJyoTpQgo22QGeA6_ajmYtYDwa21DYkai9r7yDry2VLsw8"
-GMOD_LOG_FILE = Path(r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\console.log")
-PRINTER_WEBHOOK_URL = "https://discord.com/api/webhooks/1510686749397876746/F4e0Ae4n9q95kqmdeOyJMSk4DUGdjw_kr4Cdc_O_7wyQ4ISu2n8Cdo6DTQRyYXHMrdUg"
-PRINTER_COLLECTOR_NAME = "TTVRecod"
-PRINTER_CUT_PERCENT = 20
-PAYOUT_WEBHOOK_URL = "https://discord.com/api/webhooks/1510709977994625046/CYDAtYxyDq3cNJgBEqrJYsfjJxPOq_XgiSYdymB7CM5vwR2Rykj2W2N4a_fhwA76opjl"
-PAYOUT_GIVER_NAME = "TTVRecod"
+def load_env_file(path=Path(".env")):
+    if not path.exists():
+        return
+
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        os.environ.setdefault(key, value)
+
+
+def env(name, default=""):
+    return os.getenv(name, default)
+
+
+def env_int(name, default):
+    return int(env(name, str(default)))
+
+
+def env_path(name, default):
+    return Path(env(name, default))
+
+
+load_env_file()
+
+TOKEN = env("DISCORD_BOT_TOKEN")
+STEAM_API_KEY = env("STEAM_API_KEY")
+BASE_SAVE_FILE = env_path("BASE_SAVE_FILE", "base_message.json")
+WARNINGS_FILE = env_path("WARNINGS_FILE", "warnings.json")
+BINDINGS_FILE = env_path("BINDINGS_FILE", "bindings.json")
+BLACKLIST_FILE = env_path("BLACKLIST_FILE", "blacklist.json")
+GIVEAWAYS_FILE = env_path("GIVEAWAYS_FILE", "giveaways.json")
+STATUS_MESSAGE_FILE = env_path("STATUS_MESSAGE_FILE", "status_message.json")
+GMOD_WEBHOOK_SETTINGS_FILE = env_path("GMOD_WEBHOOK_SETTINGS_FILE", "gmod_webhook_settings.json")
+WEB_DASHBOARD_HOST = env("WEB_DASHBOARD_HOST", "0.0.0.0")
+WEB_DASHBOARD_PORT = env_int("WEB_DASHBOARD_PORT", 8080)
+DISCORD_LOGO_URL = env("DISCORD_LOGO_URL", "https://i.imgur.com/XUAp7MU.png")
+LOA_APPLICATIONS_CHANNEL_ID = env_int("LOA_APPLICATIONS_CHANNEL_ID", 1508499978253766866)
+LOA_PEOPLE_CHANNEL_ID = env_int("LOA_PEOPLE_CHANNEL_ID", 1508501143100194948)
+LOA_ROLE_ID = env_int("LOA_ROLE_ID", 1508499680252793075)
+VERIFIED_ROLE_ID = env_int("VERIFIED_ROLE_ID", 1508503687411011755)
+GANG_MEMBER_ROLE_ID = env_int("GANG_MEMBER_ROLE_ID", 1503498704278257775)
+STARTER_ROLE_ID = env_int("STARTER_ROLE_ID", 1486165333336260755)
+BOT_STATUS_CHANNEL_ID = env_int("BOT_STATUS_CHANNEL_ID", 1508529868277813398)
+BLACKLIST_CHANNEL_ID = env_int("BLACKLIST_CHANNEL_ID", 1493910793295495258)
+GMOD_WEBHOOK_URL = env("GMOD_WEBHOOK_URL")
+GMOD_LOG_FILE = env_path("GMOD_LOG_FILE", r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\console.log")
+PRINTER_WEBHOOK_URL = env("PRINTER_WEBHOOK_URL")
+PRINTER_COLLECTOR_NAME = env("PRINTER_COLLECTOR_NAME", "TTVRecod")
+PRINTER_CUT_PERCENT = env_int("PRINTER_CUT_PERCENT", 20)
+PAYOUT_WEBHOOK_URL = env("PAYOUT_WEBHOOK_URL")
+PAYOUT_GIVER_NAME = env("PAYOUT_GIVER_NAME", "TTVRecod")
 
 EMOJI_SHARK = "\U0001F988"
 EMOJI_PARTY = "\U0001F389"
@@ -1153,7 +1182,7 @@ async def send_gmod_webhook(message):
 
 
 async def fetch_steam_profile(steam_id_64):
-    if STEAM_API_KEY == "PUT_YOUR_STEAM_API_KEY_HERE":
+    if not STEAM_API_KEY or STEAM_API_KEY == "PUT_YOUR_STEAM_API_KEY_HERE":
         return None
 
     url = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/"
